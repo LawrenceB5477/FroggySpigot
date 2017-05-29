@@ -9,9 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
-/**
- * Created by Lbadv on 5/28/2017.
- */
+//Basic command, gives you lilypads
 public class FrogKit implements CommandExecutor {
     //Get the instance of the main class. Used to read the config file.
     private JavaPlugin main;

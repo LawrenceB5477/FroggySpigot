@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
-//TODO add a help command, and mutli word support for set
+//TODO add a help command, add a set ammount command
 /**
  * Creates a kit based on the config.yml, and allows the player to edit the item it gives
  */
@@ -31,6 +31,7 @@ public class ConfigKit implements CommandExecutor{
             //Give the item with the amount to give in the file config
         if (strings.length == 0) {
             Material item = Material.matchMaterial(main.getConfig().getString("configkit item"));
+
             int value = main.getConfig().getInt("configkit value");
             ItemStack items = new ItemStack(item, value);
 
@@ -54,9 +55,10 @@ public class ConfigKit implements CommandExecutor{
             player.sendMessage("You must specify what you want to set the item to.");
             return true;
 
-            //Set the item that is given by the command
+            //Set the item that is given by the command, and possibly the value
         } else if (strings.length > 1 && strings[0].equalsIgnoreCase("set")) {
             try {
+                //Gets the material, then uses its name to set the config gile
                 Material item = Material.matchMaterial(strings[1]);
                 if (item == null) {
                     throw new IllegalArgumentException();
@@ -64,6 +66,35 @@ public class ConfigKit implements CommandExecutor{
                 String itemName = item.toString();
                 main.getConfig().set("configkit item", itemName);
                 player.sendMessage("Configkit item set to: " + itemName);
+
+                //Gives the items to the player if specified
+                if (strings.length > 2 && strings[2].equalsIgnoreCase("get")) {
+                    Material recievedItem = Material.matchMaterial(main.getConfig().getString("configkit item"));
+                    ItemStack addedItem = new ItemStack(recievedItem, main.getConfig().getInt("configkit value"));
+                    player.getInventory().addItem(addedItem);
+                    return true;
+                }
+
+                //Sets the number of items to give in the config if specified
+                if (strings.length > 2) {
+                    try {
+                        int itemNumbers = Integer.parseInt(strings[2]);
+                        main.getConfig().set("configkit value", itemNumbers);
+                        player.sendMessage("Configkit value set to: " + itemNumbers);
+
+                        //Gives the player the item set if specified
+                        if (strings.length > 3 && strings[3].equalsIgnoreCase("get")) {
+                            Material recievedItem = Material.matchMaterial(main.getConfig().getString("configkit item"));
+                            ItemStack addedItem = new ItemStack(recievedItem, itemNumbers);
+                            player.getInventory().addItem(addedItem);
+                            return true;
+                        }
+                        return true;
+                    } catch (NumberFormatException e) {
+                        player.sendMessage("You must set the amount of items you want, as a number.");
+                        return true;
+                    }
+                }
                 return true;
             } catch (IllegalArgumentException e) {
                 player.sendMessage("The command argument is not an item.");

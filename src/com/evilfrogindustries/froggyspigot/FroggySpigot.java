@@ -40,7 +40,7 @@ public class FroggySpigot extends JavaPlugin {
 
         //Register commands
         this.getCommand("frogkit").setExecutor(new FrogKit(this));
-        this.getCommand("configkit").setExecutor(new ConfigKit(this));
+        this.getCommand("cgkit").setExecutor(new ConfigKit(this));
 
     }
 

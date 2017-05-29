@@ -1,11 +1,11 @@
-name: TestPlugin
+name: FroggySpigot
 version: 1.0.0
 author: evilFrog
-main: com.evilfrogindustries.froggyspigot.evilFrog.FroggySpigotpigot.Main
+main: com.evilfrogindustries.froggyspigot.FroggySpigot
 commands:
   frogkit:
     description: Lilypads
     usage: /frogkit
-  configkit:
+  cgkit:
     description: Items given by config file.
     usage: /configkit
