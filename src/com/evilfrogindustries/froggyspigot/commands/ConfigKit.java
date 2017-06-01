@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
-//TODO add a help command, add a set ammount command
+//TODO add a help command, add a set ammount command, clean this up
 /**
  * Creates a kit based on the config.yml, and allows the player to edit the item it gives
  */

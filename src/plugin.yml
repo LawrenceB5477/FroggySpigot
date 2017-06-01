@@ -9,3 +9,6 @@ commands:
   cgkit:
     description: Items given by config file.
     usage: /configkit
+  getalchstone:
+    description: Gives you an alchemy stone.
+    usage: /configkit

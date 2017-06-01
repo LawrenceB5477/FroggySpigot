@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
+//TODO make help command
 //Basic command, gives you lilypads
 public class FrogKit implements CommandExecutor {
     //Get the instance of the main class. Used to read the config file.

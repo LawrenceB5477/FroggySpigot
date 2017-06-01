@@ -1,22 +1,13 @@
 package com.evilfrogindustries.froggyspigot;
 
-/**
- * Created by Lbadv on 5/29/2017.
- */
-
-
 import com.evilfrogindustries.froggyspigot.commands.*;
-import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerJoinEvent;
+import com.evilfrogindustries.froggyspigot.events.ActivateAlchStone;
+import com.evilfrogindustries.froggyspigot.events.ServerWelcome;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 
-/**
- * Created by Lbadv on 5/28/2017.
- */
+//The controller of the plugin.
 public class FroggySpigot extends JavaPlugin {
 
 
@@ -24,23 +15,14 @@ public class FroggySpigot extends JavaPlugin {
     public void onEnable() {
         createConfig();
 
-        //Event listener for player joining
-        getServer().getPluginManager().registerEvents(new Listener() {
-            //Event handler for this class, effects the player joining
-            @EventHandler
-            public void onPlayerJoin(PlayerJoinEvent event) {
-                Player player = event.getPlayer();
-                if (getConfig().getBoolean("Awesome")) {
-                    player.sendMessage("You are indeed awesome.");
-                } else {
-                    player.sendMessage("You suck.");
-                }
-            }
-        }, this);
+        //Event listeners
+        getServer().getPluginManager().registerEvents(new ServerWelcome(this), this);
+        getServer().getPluginManager().registerEvents(new ActivateAlchStone(), this);
 
         //Register commands
         this.getCommand("frogkit").setExecutor(new FrogKit(this));
         this.getCommand("cgkit").setExecutor(new ConfigKit(this));
+        this.getCommand("getalchstone").setExecutor(new getAlchStone(this));
 
     }
 
@@ -77,6 +59,7 @@ public class FroggySpigot extends JavaPlugin {
             saveConfig();
         }
     }
+
 
 }
 
